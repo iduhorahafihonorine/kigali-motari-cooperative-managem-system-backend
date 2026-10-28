@@ -1,0 +1,551 @@
+{
+  "info": {
+    "_postman_id": "27965-kigali-motari-midterm",
+    "name": "Kigali Motari Cooperative Management System – Midterm",
+    "description": "Student: Iduhorahafi Honorine (27965)\nProject: Kigali Motari Cooperative Management System\nOne folder/request group per requirement ID as required by the exam paper.\nSeed data uses Rwandan names.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8081" },
+    { "key": "zoneNyabugogoId", "value": "" },
+    { "key": "zoneKimironkoId", "value": "" },
+    { "key": "zoneRemeraId", "value": "" },
+    { "key": "zoneNyamiramboId", "value": "" },
+    { "key": "moto1Id", "value": "" },
+    { "key": "moto2Id", "value": "" },
+    { "key": "moto3Id", "value": "" },
+    { "key": "moto4Id", "value": "" },
+    { "key": "riderJeanId", "value": "" },
+    { "key": "riderClaudineId", "value": "" },
+    { "key": "riderEricId", "value": "" },
+    { "key": "passengerHonorineId", "value": "" },
+    { "key": "passengerPatrickId", "value": "" },
+    { "key": "passengerAliceId", "value": "" },
+    { "key": "passengerDianeId", "value": "" },
+    { "key": "passengerGraceId", "value": "" },
+    { "key": "rideId", "value": "" },
+    { "key": "unknownId", "value": "00000000-0000-0000-0000-000000000099" }
+  ],
+  "item": [
+    {
+      "name": "A2",
+      "description": "Part A2 – CRUD for zones, motorcycles, riders, passengers, rides. Seed Step 0 with Rwandan names. Run seed saves in order, then Capture IDs, then linked rider/ride saves.",
+      "item": [
+        {
+          "name": "A2 – Seed Zone Nyabugogo",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nyabugogo\"\n}"
+            },
+            "url": "{{baseUrl}}/api/zones/save",
+            "description": "201 Zone saved successfully"
+          }
+        },
+        {
+          "name": "A2 – Seed Zone Kimironko",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Kimironko\"\n}"
+            },
+            "url": "{{baseUrl}}/api/zones/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Zone Remera",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Remera\"\n}"
+            },
+            "url": "{{baseUrl}}/api/zones/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Zone Nyamirambo (unused)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nyamirambo\"\n}"
+            },
+            "url": "{{baseUrl}}/api/zones/save",
+            "description": "Nobody holds Nyamirambo (for Part C3 later)."
+          }
+        },
+        {
+          "name": "A2 – Capture Zone IDs",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Zones returned', function () { pm.response.to.have.status(200); });",
+                  "const zones = pm.response.json();",
+                  "zones.forEach(z => {",
+                  "  if (z.name === 'Nyabugogo') pm.collectionVariables.set('zoneNyabugogoId', z.id);",
+                  "  if (z.name === 'Kimironko') pm.collectionVariables.set('zoneKimironkoId', z.id);",
+                  "  if (z.name === 'Remera') pm.collectionVariables.set('zoneRemeraId', z.id);",
+                  "  if (z.name === 'Nyamirambo') pm.collectionVariables.set('zoneNyamiramboId', z.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/zones/all"
+          }
+        },
+        {
+          "name": "A2 – Seed Motorcycle 1",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fleetNumber\": 1,\n  \"plate\": \"RAD001A\"\n}"
+            },
+            "url": "{{baseUrl}}/api/motorcycles/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Motorcycle 2",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fleetNumber\": 2,\n  \"plate\": \"RAD002B\"\n}"
+            },
+            "url": "{{baseUrl}}/api/motorcycles/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Motorcycle 3",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fleetNumber\": 3,\n  \"plate\": \"RAD003C\"\n}"
+            },
+            "url": "{{baseUrl}}/api/motorcycles/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Motorcycle 4 (free)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fleetNumber\": 4,\n  \"plate\": \"RAD004D\"\n}"
+            },
+            "url": "{{baseUrl}}/api/motorcycles/save",
+            "description": "Motorcycle 4 has no rider."
+          }
+        },
+        {
+          "name": "A2 – Capture Motorcycle IDs",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Motorcycles returned', function () { pm.response.to.have.status(200); });",
+                  "const list = pm.response.json();",
+                  "list.forEach(m => {",
+                  "  if (m.fleetNumber === 1) pm.collectionVariables.set('moto1Id', m.id);",
+                  "  if (m.fleetNumber === 2) pm.collectionVariables.set('moto2Id', m.id);",
+                  "  if (m.fleetNumber === 3) pm.collectionVariables.set('moto3Id', m.id);",
+                  "  if (m.fleetNumber === 4) pm.collectionVariables.set('moto4Id', m.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/motorcycles/all"
+          }
+        },
+        {
+          "name": "A2 – Seed Rider Jean Baptiste Uwimana (2 zones)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jean Baptiste\",\n  \"lastName\": \"Uwimana\",\n  \"licenceNumber\": \"LIC-RW-1001\",\n  \"motorcycle\": { \"id\": \"{{moto1Id}}\" },\n  \"zones\": [\n    { \"id\": \"{{zoneNyabugogoId}}\" },\n    { \"id\": \"{{zoneRemeraId}}\" }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/api/riders/save",
+            "description": "Holds two zones: Nyabugogo + Remera. Motorcycle 1."
+          }
+        },
+        {
+          "name": "A2 – Seed Rider Claudine Mukamana (1 zone)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Claudine\",\n  \"lastName\": \"Mukamana\",\n  \"licenceNumber\": \"LIC-RW-1002\",\n  \"motorcycle\": { \"id\": \"{{moto2Id}}\" },\n  \"zones\": [\n    { \"id\": \"{{zoneKimironkoId}}\" }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/api/riders/save",
+            "description": "Holds exactly one zone: Kimironko. Motorcycle 2."
+          }
+        },
+        {
+          "name": "A2 – Seed Rider Eric Habimana",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Eric\",\n  \"lastName\": \"Habimana\",\n  \"licenceNumber\": \"LIC-RW-1003\",\n  \"motorcycle\": { \"id\": \"{{moto3Id}}\" },\n  \"zones\": [\n    { \"id\": \"{{zoneRemeraId}}\" }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/api/riders/save",
+            "description": "Motorcycle 3. Nyamirambo stays unused. Motorcycle 4 stays free."
+          }
+        },
+        {
+          "name": "A2 – Capture Rider IDs",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Riders returned', function () { pm.response.to.have.status(200); });",
+                  "const list = pm.response.json();",
+                  "list.forEach(r => {",
+                  "  if (r.firstName === 'Jean Baptiste' && r.lastName === 'Uwimana') pm.collectionVariables.set('riderJeanId', r.id);",
+                  "  if (r.firstName === 'Claudine' && r.lastName === 'Mukamana') pm.collectionVariables.set('riderClaudineId', r.id);",
+                  "  if (r.firstName === 'Eric' && r.lastName === 'Habimana') pm.collectionVariables.set('riderEricId', r.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/riders/all"
+          }
+        },
+        {
+          "name": "A2 – Seed Passenger Honorine Iduhorahafi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Honorine\",\n  \"lastName\": \"Iduhorahafi\",\n  \"phone\": \"0781234567\",\n  \"email\": \"honorine.iduhorahafi@email.rw\"\n}"
+            },
+            "url": "{{baseUrl}}/api/passengers/save",
+            "description": "Business phone used often in later parts: 0781234567"
+          }
+        },
+        {
+          "name": "A2 – Seed Passenger Patrick Iduhorahafi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Patrick\",\n  \"lastName\": \"Iduhorahafi\",\n  \"phone\": \"0782345678\",\n  \"email\": \"patrick.iduhorahafi@email.rw\"\n}"
+            },
+            "url": "{{baseUrl}}/api/passengers/save",
+            "description": "Second passenger with lastName Iduhorahafi (for B1)."
+          }
+        },
+        {
+          "name": "A2 – Seed Passenger Alice Uwase",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Uwase\",\n  \"phone\": \"0783456789\",\n  \"email\": \"alice.uwase@email.rw\"\n}"
+            },
+            "url": "{{baseUrl}}/api/passengers/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Passenger Diane Ingabire",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Diane\",\n  \"lastName\": \"Ingabire\",\n  \"phone\": \"0784567890\",\n  \"email\": \"diane.ingabire@email.rw\"\n}"
+            },
+            "url": "{{baseUrl}}/api/passengers/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Passenger Grace Niyonsaba",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Grace\",\n  \"lastName\": \"Niyonsaba\",\n  \"phone\": \"0785678901\",\n  \"email\": \"grace.niyonsaba@email.rw\"\n}"
+            },
+            "url": "{{baseUrl}}/api/passengers/save"
+          }
+        },
+        {
+          "name": "A2 – Capture Passenger IDs",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Passengers returned', function () { pm.response.to.have.status(200); });",
+                  "const list = pm.response.json();",
+                  "list.forEach(p => {",
+                  "  if (p.phone === '0781234567') pm.collectionVariables.set('passengerHonorineId', p.id);",
+                  "  if (p.phone === '0782345678') pm.collectionVariables.set('passengerPatrickId', p.id);",
+                  "  if (p.phone === '0783456789') pm.collectionVariables.set('passengerAliceId', p.id);",
+                  "  if (p.phone === '0784567890') pm.collectionVariables.set('passengerDianeId', p.id);",
+                  "  if (p.phone === '0785678901') pm.collectionVariables.set('passengerGraceId', p.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/passengers/all"
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 1 DROPPED_OFF",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-10-05\",\n  \"status\": \"DROPPED_OFF\",\n  \"pickup\": \"Nyabugogo Taxi Park\",\n  \"destination\": \"Kimironko Market\",\n  \"passenger\": { \"id\": \"{{passengerHonorineId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 2 DROPPED_OFF",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-10-12\",\n  \"status\": \"DROPPED_OFF\",\n  \"pickup\": \"Remera\",\n  \"destination\": \"Kigali Heights\",\n  \"passenger\": { \"id\": \"{{passengerPatrickId}}\" },\n  \"rider\": { \"id\": \"{{riderClaudineId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 3 REQUESTED",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-10-15\",\n  \"status\": \"REQUESTED\",\n  \"pickup\": \"Kimironko\",\n  \"destination\": \"Nyamirambo\",\n  \"passenger\": { \"id\": \"{{passengerAliceId}}\" },\n  \"rider\": { \"id\": \"{{riderEricId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 4 PICKED_UP",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-10-18\",\n  \"status\": \"PICKED_UP\",\n  \"pickup\": \"Kacyiru\",\n  \"destination\": \"Kanombe\",\n  \"passenger\": { \"id\": \"{{passengerDianeId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 5 Jean 2026-10-20 REQUESTED",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-10-20\",\n  \"status\": \"REQUESTED\",\n  \"pickup\": \"Nyabugogo\",\n  \"destination\": \"Remera\",\n  \"passenger\": { \"id\": \"{{passengerHonorineId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save",
+            "description": "Same rider Jean has two rides on 2026-10-20."
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 6 Jean 2026-10-20 CANCELLED",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-10-20\",\n  \"status\": \"CANCELLED\",\n  \"pickup\": \"Gisozi\",\n  \"destination\": \"Kimironko\",\n  \"passenger\": { \"id\": \"{{passengerGraceId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save",
+            "description": "Second ride for Jean on 2026-10-20, CANCELLED."
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 7 Honorine (3rd ride)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-10-25\",\n  \"status\": \"PICKED_UP\",\n  \"pickup\": \"Remera\",\n  \"destination\": \"Nyabugogo\",\n  \"passenger\": { \"id\": \"{{passengerHonorineId}}\" },\n  \"rider\": { \"id\": \"{{riderClaudineId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save",
+            "description": "Honorine Iduhorahafi has at least 3 rides."
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 8 November REQUESTED",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-11-02\",\n  \"status\": \"REQUESTED\",\n  \"pickup\": \"Nyamirambo\",\n  \"destination\": \"Kigali Convention Centre\",\n  \"passenger\": { \"id\": \"{{passengerPatrickId}}\" },\n  \"rider\": { \"id\": \"{{riderEricId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 9 November CANCELLED",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-11-08\",\n  \"status\": \"CANCELLED\",\n  \"pickup\": \"Kimironko\",\n  \"destination\": \"Airport Kanombe\",\n  \"passenger\": { \"id\": \"{{passengerAliceId}}\" },\n  \"rider\": { \"id\": \"{{riderClaudineId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save"
+          }
+        },
+        {
+          "name": "A2 – Seed Ride 10 November PICKED_UP",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-11-15\",\n  \"status\": \"PICKED_UP\",\n  \"pickup\": \"Gikondo\",\n  \"destination\": \"Remera\",\n  \"passenger\": { \"id\": \"{{passengerDianeId}}\" },\n  \"rider\": { \"id\": \"{{riderEricId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save"
+          }
+        },
+        {
+          "name": "A2 – Get All Rides",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Rides returned', function () { pm.response.to.have.status(200); });",
+                  "const list = pm.response.json();",
+                  "if (list.length > 0) pm.collectionVariables.set('rideId', list[0].id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/rides/all",
+            "description": "Expect 10 rides after full seed."
+          }
+        },
+        {
+          "name": "A2 – Get Ride By Id (success)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/rides/{{rideId}}"
+          }
+        },
+        {
+          "name": "A2 – Get Ride By Id (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('404 not found', function () {",
+                  "  pm.response.to.have.status(404);",
+                  "  pm.expect(pm.response.text()).to.eql('The ride with that id does not exist');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/rides/{{unknownId}}",
+            "description": "Failing case for live demo: 404"
+          }
+        },
+        {
+          "name": "A2 – Update Zone",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nyabugogo\"\n}"
+            },
+            "url": "{{baseUrl}}/api/zones/update/{{zoneNyabugogoId}}"
+          }
+        },
+        {
+          "name": "A2 – Delete Ride (404 unknown)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('404 on delete', function () {",
+                  "  pm.response.to.have.status(404);",
+                  "  pm.expect(pm.response.text()).to.eql('The ride with that id does not exist');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/rides/delete/{{unknownId}}"
+          }
+        }
+      ]
+    }
+  ]
+}
