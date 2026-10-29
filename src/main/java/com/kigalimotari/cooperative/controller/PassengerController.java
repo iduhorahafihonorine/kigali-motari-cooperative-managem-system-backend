@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -39,6 +40,22 @@ public class PassengerController {
     @GetMapping("/all")
     public ResponseEntity<List<Passenger>> getAll() {
         return new ResponseEntity<>(passengerService.getAllPassengers(), HttpStatus.OK);
+    }
+
+    // B1
+    @GetMapping("/by-last-name")
+    public ResponseEntity<List<Passenger>> byLastName(@RequestParam String lastName) {
+        return new ResponseEntity<>(passengerService.findByLastName(lastName), HttpStatus.OK);
+    }
+
+    // C4
+    @GetMapping("/of-rider/{riderId}")
+    public ResponseEntity<?> ofRider(@PathVariable UUID riderId) {
+        Optional<List<Passenger>> result = passengerService.findPassengersOfRider(riderId);
+        if (result.isEmpty()) {
+            return new ResponseEntity<>("The rider with that id does not exist", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(result.get(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

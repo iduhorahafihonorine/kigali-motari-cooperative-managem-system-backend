@@ -53,4 +53,9 @@ public class RiderService {
         riderRepository.deleteById(id);
         return "Rider deleted successfully";
     }
+
+    // C1
+    public List<Rider> findByZoneName(String name) {
+        return riderRepository.findByZoneNameIgnoreCase(name);
+    }
 }

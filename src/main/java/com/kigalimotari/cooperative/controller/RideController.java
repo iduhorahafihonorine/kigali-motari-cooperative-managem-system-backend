@@ -1,6 +1,7 @@
 package com.kigalimotari.cooperative.controller;
 
 import com.kigalimotari.cooperative.model.Ride;
+import com.kigalimotari.cooperative.model.RideStatus;
 import com.kigalimotari.cooperative.service.RideService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,6 +42,20 @@ public class RideController {
     @GetMapping("/all")
     public ResponseEntity<List<Ride>> getAll() {
         return new ResponseEntity<>(rideService.getAllRides(), HttpStatus.OK);
+    }
+
+    // B2
+    @GetMapping("/by-status")
+    public ResponseEntity<List<Ride>> byStatus(@RequestParam RideStatus status) {
+        return new ResponseEntity<>(rideService.findByStatus(status), HttpStatus.OK);
+    }
+
+    // B3 – parse Strings into LocalDate in the controller
+    @GetMapping("/between")
+    public ResponseEntity<List<Ride>> between(@RequestParam String start, @RequestParam String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+        return new ResponseEntity<>(rideService.findBetween(startDate, endDate), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

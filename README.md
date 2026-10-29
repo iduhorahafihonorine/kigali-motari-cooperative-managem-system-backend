@@ -1,4 +1,4 @@
-# Kigali-Motari-Cooperative-Management-System
+# Kigali Motari Cooperative Management System
 
 ## Student information
 
@@ -28,7 +28,7 @@ Backend API for a Kigali moto-taxi cooperative: zones, motorcycles, riders, pass
 3. Database created:
 
 ```bash
-createdb kigali_motari
+createdb kigali_motari_db
 # or in psql:
 # CREATE DATABASE kigali_motari_db;
 ```
@@ -36,9 +36,9 @@ createdb kigali_motari
 4. Update credentials in `src/main/resources/application.properties` if needed:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5433/kigali_motari
+spring.datasource.url=
 spring.datasource.username=postgres
-spring.datasource.password=honorine
+spring.datasource.password=YOUR_PASSWORD
 ```
 
 ## How to run the API
@@ -48,11 +48,11 @@ cd kigali-motari-cooperative-management-system
 ./mvnw spring-boot:run
 ```
 
-The API starts at **http://localhost:8081**
+The API starts at **http://localhost:8080**
 
 ### Swagger UI (interactive testing)
 
-Open: [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
+Open: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 ### Postman
 
@@ -60,7 +60,7 @@ Import the collection at the repo root:
 
 `kigali-motari-cooperative-management-system-midterm.postman_collection.json`
 
-Collection variable `baseUrl` defaults to `http://localhost:8081`.
+Collection variable `baseUrl` defaults to `http://localhost:8080`.
 
 ## Part A endpoints (CRUD)
 

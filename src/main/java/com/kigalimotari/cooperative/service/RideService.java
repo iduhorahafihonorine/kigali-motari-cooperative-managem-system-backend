@@ -1,9 +1,11 @@
 package com.kigalimotari.cooperative.service;
 
 import com.kigalimotari.cooperative.model.Ride;
+import com.kigalimotari.cooperative.model.RideStatus;
 import com.kigalimotari.cooperative.repository.RideRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -53,5 +55,15 @@ public class RideService {
         }
         rideRepository.deleteById(id);
         return "Ride deleted successfully";
+    }
+
+    // B2
+    public List<Ride> findByStatus(RideStatus status) {
+        return rideRepository.findByStatusOrderByRideDateAsc(status);
+    }
+
+    // B3
+    public List<Ride> findBetween(LocalDate start, LocalDate end) {
+        return rideRepository.findByRideDateBetweenOrderByRideDateAsc(start, end);
     }
 }

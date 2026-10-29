@@ -41,6 +41,12 @@ public class MotorcycleController {
         return new ResponseEntity<>(motorcycleService.getAllMotorcycles(), HttpStatus.OK);
     }
 
+    // C2
+    @GetMapping("/free")
+    public ResponseEntity<List<Motorcycle>> free() {
+        return new ResponseEntity<>(motorcycleService.findFreeMotorcycles(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<Motorcycle> motorcycle = motorcycleService.getMotorcycleById(id);

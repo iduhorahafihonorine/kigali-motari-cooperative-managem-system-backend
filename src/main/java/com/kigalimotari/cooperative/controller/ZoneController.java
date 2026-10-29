@@ -41,6 +41,12 @@ public class ZoneController {
         return new ResponseEntity<>(zoneService.getAllZones(), HttpStatus.OK);
     }
 
+    // C3
+    @GetMapping("/unused")
+    public ResponseEntity<List<Zone>> unused() {
+        return new ResponseEntity<>(zoneService.findUnusedZones(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         Optional<Zone> zone = zoneService.getZoneById(id);

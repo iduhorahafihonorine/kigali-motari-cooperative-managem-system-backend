@@ -49,4 +49,9 @@ public class ZoneService {
         zoneRepository.deleteById(id);
         return "Zone deleted successfully";
     }
+
+    // C3
+    public List<Zone> findUnusedZones() {
+        return zoneRepository.findUnusedZones();
+    }
 }

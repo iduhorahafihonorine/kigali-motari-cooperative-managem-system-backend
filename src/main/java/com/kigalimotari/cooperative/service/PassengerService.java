@@ -2,6 +2,7 @@ package com.kigalimotari.cooperative.service;
 
 import com.kigalimotari.cooperative.model.Passenger;
 import com.kigalimotari.cooperative.repository.PassengerRepository;
+import com.kigalimotari.cooperative.repository.RiderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +13,11 @@ import java.util.UUID;
 public class PassengerService {
 
     private final PassengerRepository passengerRepository;
+    private final RiderRepository riderRepository;
 
-    public PassengerService(PassengerRepository passengerRepository) {
+    public PassengerService(PassengerRepository passengerRepository, RiderRepository riderRepository) {
         this.passengerRepository = passengerRepository;
+        this.riderRepository = riderRepository;
     }
 
     public String savePassenger(Passenger passenger) {
@@ -51,5 +54,18 @@ public class PassengerService {
         }
         passengerRepository.deleteById(id);
         return "Passenger deleted successfully";
+    }
+
+    // B1
+    public List<Passenger> findByLastName(String lastName) {
+        return passengerRepository.findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
+    }
+
+    // C4 – returns empty Optional when rider missing (controller maps 404)
+    public Optional<List<Passenger>> findPassengersOfRider(UUID riderId) {
+        if (!riderRepository.existsById(riderId)) {
+            return Optional.empty();
+        }
+        return Optional.of(passengerRepository.findDistinctPassengersOfRider(riderId));
     }
 }

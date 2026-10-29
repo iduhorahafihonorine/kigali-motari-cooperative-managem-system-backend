@@ -50,4 +50,9 @@ public class MotorcycleService {
         motorcycleRepository.deleteById(id);
         return "Motorcycle deleted successfully";
     }
+
+    // C2
+    public List<Motorcycle> findFreeMotorcycles() {
+        return motorcycleRepository.findFreeMotorcycles();
+    }
 }

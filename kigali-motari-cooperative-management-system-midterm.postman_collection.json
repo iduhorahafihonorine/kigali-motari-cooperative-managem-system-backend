@@ -1,41 +1,103 @@
 {
   "info": {
     "_postman_id": "27965-kigali-motari-midterm",
-    "name": "Kigali Motari Cooperative Management System – Midterm",
+    "name": "Kigali Motari Cooperative Management System \u2013 Midterm",
     "description": "Student: Iduhorahafi Honorine (27965)\nProject: Kigali Motari Cooperative Management System\nOne folder/request group per requirement ID as required by the exam paper.\nSeed data uses Rwandan names.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:8081" },
-    { "key": "zoneNyabugogoId", "value": "" },
-    { "key": "zoneKimironkoId", "value": "" },
-    { "key": "zoneRemeraId", "value": "" },
-    { "key": "zoneNyamiramboId", "value": "" },
-    { "key": "moto1Id", "value": "" },
-    { "key": "moto2Id", "value": "" },
-    { "key": "moto3Id", "value": "" },
-    { "key": "moto4Id", "value": "" },
-    { "key": "riderJeanId", "value": "" },
-    { "key": "riderClaudineId", "value": "" },
-    { "key": "riderEricId", "value": "" },
-    { "key": "passengerHonorineId", "value": "" },
-    { "key": "passengerPatrickId", "value": "" },
-    { "key": "passengerAliceId", "value": "" },
-    { "key": "passengerDianeId", "value": "" },
-    { "key": "passengerGraceId", "value": "" },
-    { "key": "rideId", "value": "" },
-    { "key": "unknownId", "value": "00000000-0000-0000-0000-000000000099" }
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "zoneNyabugogoId",
+      "value": ""
+    },
+    {
+      "key": "zoneKimironkoId",
+      "value": ""
+    },
+    {
+      "key": "zoneRemeraId",
+      "value": ""
+    },
+    {
+      "key": "zoneNyamiramboId",
+      "value": ""
+    },
+    {
+      "key": "moto1Id",
+      "value": ""
+    },
+    {
+      "key": "moto2Id",
+      "value": ""
+    },
+    {
+      "key": "moto3Id",
+      "value": ""
+    },
+    {
+      "key": "moto4Id",
+      "value": ""
+    },
+    {
+      "key": "riderJeanId",
+      "value": ""
+    },
+    {
+      "key": "riderClaudineId",
+      "value": ""
+    },
+    {
+      "key": "riderEricId",
+      "value": ""
+    },
+    {
+      "key": "passengerHonorineId",
+      "value": ""
+    },
+    {
+      "key": "passengerPatrickId",
+      "value": ""
+    },
+    {
+      "key": "passengerAliceId",
+      "value": ""
+    },
+    {
+      "key": "passengerDianeId",
+      "value": ""
+    },
+    {
+      "key": "passengerGraceId",
+      "value": ""
+    },
+    {
+      "key": "rideId",
+      "value": ""
+    },
+    {
+      "key": "unknownId",
+      "value": "00000000-0000-0000-0000-000000000099"
+    }
   ],
   "item": [
     {
       "name": "A2",
-      "description": "Part A2 – CRUD for zones, motorcycles, riders, passengers, rides. Seed Step 0 with Rwandan names. Run seed saves in order, then Capture IDs, then linked rider/ride saves.",
+      "description": "Part A2 \u2013 CRUD for zones, motorcycles, riders, passengers, rides. Seed Step 0 with Rwandan names. Run seed saves in order, then Capture IDs, then linked rider/ride saves.",
       "item": [
         {
-          "name": "A2 – Seed Zone Nyabugogo",
+          "name": "A2 \u2013 Seed Zone Nyabugogo",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Nyabugogo\"\n}"
@@ -45,10 +107,15 @@
           }
         },
         {
-          "name": "A2 – Seed Zone Kimironko",
+          "name": "A2 \u2013 Seed Zone Kimironko",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Kimironko\"\n}"
@@ -57,10 +124,15 @@
           }
         },
         {
-          "name": "A2 – Seed Zone Remera",
+          "name": "A2 \u2013 Seed Zone Remera",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Remera\"\n}"
@@ -69,10 +141,15 @@
           }
         },
         {
-          "name": "A2 – Seed Zone Nyamirambo (unused)",
+          "name": "A2 \u2013 Seed Zone Nyamirambo (unused)",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Nyamirambo\"\n}"
@@ -82,7 +159,7 @@
           }
         },
         {
-          "name": "A2 – Capture Zone IDs",
+          "name": "A2 \u2013 Capture Zone IDs",
           "event": [
             {
               "listen": "test",
@@ -108,10 +185,15 @@
           }
         },
         {
-          "name": "A2 – Seed Motorcycle 1",
+          "name": "A2 \u2013 Seed Motorcycle 1",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"fleetNumber\": 1,\n  \"plate\": \"RAD001A\"\n}"
@@ -120,10 +202,15 @@
           }
         },
         {
-          "name": "A2 – Seed Motorcycle 2",
+          "name": "A2 \u2013 Seed Motorcycle 2",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"fleetNumber\": 2,\n  \"plate\": \"RAD002B\"\n}"
@@ -132,10 +219,15 @@
           }
         },
         {
-          "name": "A2 – Seed Motorcycle 3",
+          "name": "A2 \u2013 Seed Motorcycle 3",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"fleetNumber\": 3,\n  \"plate\": \"RAD003C\"\n}"
@@ -144,10 +236,15 @@
           }
         },
         {
-          "name": "A2 – Seed Motorcycle 4 (free)",
+          "name": "A2 \u2013 Seed Motorcycle 4 (free)",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"fleetNumber\": 4,\n  \"plate\": \"RAD004D\"\n}"
@@ -157,7 +254,7 @@
           }
         },
         {
-          "name": "A2 – Capture Motorcycle IDs",
+          "name": "A2 \u2013 Capture Motorcycle IDs",
           "event": [
             {
               "listen": "test",
@@ -183,10 +280,15 @@
           }
         },
         {
-          "name": "A2 – Seed Rider Jean Baptiste Uwimana (2 zones)",
+          "name": "A2 \u2013 Seed Rider Jean Baptiste Uwimana (2 zones)",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Jean Baptiste\",\n  \"lastName\": \"Uwimana\",\n  \"licenceNumber\": \"LIC-RW-1001\",\n  \"motorcycle\": { \"id\": \"{{moto1Id}}\" },\n  \"zones\": [\n    { \"id\": \"{{zoneNyabugogoId}}\" },\n    { \"id\": \"{{zoneRemeraId}}\" }\n  ]\n}"
@@ -196,10 +298,15 @@
           }
         },
         {
-          "name": "A2 – Seed Rider Claudine Mukamana (1 zone)",
+          "name": "A2 \u2013 Seed Rider Claudine Mukamana (1 zone)",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Claudine\",\n  \"lastName\": \"Mukamana\",\n  \"licenceNumber\": \"LIC-RW-1002\",\n  \"motorcycle\": { \"id\": \"{{moto2Id}}\" },\n  \"zones\": [\n    { \"id\": \"{{zoneKimironkoId}}\" }\n  ]\n}"
@@ -209,10 +316,15 @@
           }
         },
         {
-          "name": "A2 – Seed Rider Eric Habimana",
+          "name": "A2 \u2013 Seed Rider Eric Habimana",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Eric\",\n  \"lastName\": \"Habimana\",\n  \"licenceNumber\": \"LIC-RW-1003\",\n  \"motorcycle\": { \"id\": \"{{moto3Id}}\" },\n  \"zones\": [\n    { \"id\": \"{{zoneRemeraId}}\" }\n  ]\n}"
@@ -222,7 +334,7 @@
           }
         },
         {
-          "name": "A2 – Capture Rider IDs",
+          "name": "A2 \u2013 Capture Rider IDs",
           "event": [
             {
               "listen": "test",
@@ -247,10 +359,15 @@
           }
         },
         {
-          "name": "A2 – Seed Passenger Honorine Iduhorahafi",
+          "name": "A2 \u2013 Seed Passenger Honorine Iduhorahafi",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Honorine\",\n  \"lastName\": \"Iduhorahafi\",\n  \"phone\": \"0781234567\",\n  \"email\": \"honorine.iduhorahafi@email.rw\"\n}"
@@ -260,10 +377,15 @@
           }
         },
         {
-          "name": "A2 – Seed Passenger Patrick Iduhorahafi",
+          "name": "A2 \u2013 Seed Passenger Patrick Iduhorahafi",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Patrick\",\n  \"lastName\": \"Iduhorahafi\",\n  \"phone\": \"0782345678\",\n  \"email\": \"patrick.iduhorahafi@email.rw\"\n}"
@@ -273,10 +395,15 @@
           }
         },
         {
-          "name": "A2 – Seed Passenger Alice Uwase",
+          "name": "A2 \u2013 Seed Passenger Alice Uwase",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Alice\",\n  \"lastName\": \"Uwase\",\n  \"phone\": \"0783456789\",\n  \"email\": \"alice.uwase@email.rw\"\n}"
@@ -285,10 +412,15 @@
           }
         },
         {
-          "name": "A2 – Seed Passenger Diane Ingabire",
+          "name": "A2 \u2013 Seed Passenger Diane Ingabire",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Diane\",\n  \"lastName\": \"Ingabire\",\n  \"phone\": \"0784567890\",\n  \"email\": \"diane.ingabire@email.rw\"\n}"
@@ -297,10 +429,15 @@
           }
         },
         {
-          "name": "A2 – Seed Passenger Grace Niyonsaba",
+          "name": "A2 \u2013 Seed Passenger Grace Niyonsaba",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"firstName\": \"Grace\",\n  \"lastName\": \"Niyonsaba\",\n  \"phone\": \"0785678901\",\n  \"email\": \"grace.niyonsaba@email.rw\"\n}"
@@ -309,7 +446,7 @@
           }
         },
         {
-          "name": "A2 – Capture Passenger IDs",
+          "name": "A2 \u2013 Capture Passenger IDs",
           "event": [
             {
               "listen": "test",
@@ -336,10 +473,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 1 DROPPED_OFF",
+          "name": "A2 \u2013 Seed Ride 1 DROPPED_OFF",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-10-05\",\n  \"status\": \"DROPPED_OFF\",\n  \"pickup\": \"Nyabugogo Taxi Park\",\n  \"destination\": \"Kimironko Market\",\n  \"passenger\": { \"id\": \"{{passengerHonorineId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
@@ -348,10 +490,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 2 DROPPED_OFF",
+          "name": "A2 \u2013 Seed Ride 2 DROPPED_OFF",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-10-12\",\n  \"status\": \"DROPPED_OFF\",\n  \"pickup\": \"Remera\",\n  \"destination\": \"Kigali Heights\",\n  \"passenger\": { \"id\": \"{{passengerPatrickId}}\" },\n  \"rider\": { \"id\": \"{{riderClaudineId}}\" }\n}"
@@ -360,10 +507,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 3 REQUESTED",
+          "name": "A2 \u2013 Seed Ride 3 REQUESTED",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-10-15\",\n  \"status\": \"REQUESTED\",\n  \"pickup\": \"Kimironko\",\n  \"destination\": \"Nyamirambo\",\n  \"passenger\": { \"id\": \"{{passengerAliceId}}\" },\n  \"rider\": { \"id\": \"{{riderEricId}}\" }\n}"
@@ -372,10 +524,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 4 PICKED_UP",
+          "name": "A2 \u2013 Seed Ride 4 PICKED_UP",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-10-18\",\n  \"status\": \"PICKED_UP\",\n  \"pickup\": \"Kacyiru\",\n  \"destination\": \"Kanombe\",\n  \"passenger\": { \"id\": \"{{passengerDianeId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
@@ -384,10 +541,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 5 Jean 2026-10-20 REQUESTED",
+          "name": "A2 \u2013 Seed Ride 5 Jean 2026-10-20 REQUESTED",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-10-20\",\n  \"status\": \"REQUESTED\",\n  \"pickup\": \"Nyabugogo\",\n  \"destination\": \"Remera\",\n  \"passenger\": { \"id\": \"{{passengerHonorineId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
@@ -397,10 +559,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 6 Jean 2026-10-20 CANCELLED",
+          "name": "A2 \u2013 Seed Ride 6 Jean 2026-10-20 CANCELLED",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-10-20\",\n  \"status\": \"CANCELLED\",\n  \"pickup\": \"Gisozi\",\n  \"destination\": \"Kimironko\",\n  \"passenger\": { \"id\": \"{{passengerGraceId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
@@ -410,10 +577,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 7 Honorine (3rd ride)",
+          "name": "A2 \u2013 Seed Ride 7 Honorine (3rd ride)",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-10-25\",\n  \"status\": \"PICKED_UP\",\n  \"pickup\": \"Remera\",\n  \"destination\": \"Nyabugogo\",\n  \"passenger\": { \"id\": \"{{passengerHonorineId}}\" },\n  \"rider\": { \"id\": \"{{riderClaudineId}}\" }\n}"
@@ -423,10 +595,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 8 November REQUESTED",
+          "name": "A2 \u2013 Seed Ride 8 November REQUESTED",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-11-02\",\n  \"status\": \"REQUESTED\",\n  \"pickup\": \"Nyamirambo\",\n  \"destination\": \"Kigali Convention Centre\",\n  \"passenger\": { \"id\": \"{{passengerPatrickId}}\" },\n  \"rider\": { \"id\": \"{{riderEricId}}\" }\n}"
@@ -435,10 +612,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 9 November CANCELLED",
+          "name": "A2 \u2013 Seed Ride 9 November CANCELLED",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-11-08\",\n  \"status\": \"CANCELLED\",\n  \"pickup\": \"Kimironko\",\n  \"destination\": \"Airport Kanombe\",\n  \"passenger\": { \"id\": \"{{passengerAliceId}}\" },\n  \"rider\": { \"id\": \"{{riderClaudineId}}\" }\n}"
@@ -447,10 +629,15 @@
           }
         },
         {
-          "name": "A2 – Seed Ride 10 November PICKED_UP",
+          "name": "A2 \u2013 Seed Ride 10 November PICKED_UP",
           "request": {
             "method": "POST",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"rideDate\": \"2026-11-15\",\n  \"status\": \"PICKED_UP\",\n  \"pickup\": \"Gikondo\",\n  \"destination\": \"Remera\",\n  \"passenger\": { \"id\": \"{{passengerDianeId}}\" },\n  \"rider\": { \"id\": \"{{riderEricId}}\" }\n}"
@@ -459,7 +646,7 @@
           }
         },
         {
-          "name": "A2 – Get All Rides",
+          "name": "A2 \u2013 Get All Rides",
           "event": [
             {
               "listen": "test",
@@ -481,7 +668,7 @@
           }
         },
         {
-          "name": "A2 – Get Ride By Id (success)",
+          "name": "A2 \u2013 Get Ride By Id (success)",
           "request": {
             "method": "GET",
             "header": [],
@@ -489,7 +676,7 @@
           }
         },
         {
-          "name": "A2 – Get Ride By Id (404)",
+          "name": "A2 \u2013 Get Ride By Id (404)",
           "event": [
             {
               "listen": "test",
@@ -512,10 +699,15 @@
           }
         },
         {
-          "name": "A2 – Update Zone",
+          "name": "A2 \u2013 Update Zone",
           "request": {
             "method": "PUT",
-            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Nyabugogo\"\n}"
@@ -524,7 +716,7 @@
           }
         },
         {
-          "name": "A2 – Delete Ride (404 unknown)",
+          "name": "A2 \u2013 Delete Ride (404 unknown)",
           "event": [
             {
               "listen": "test",
@@ -543,6 +735,194 @@
             "method": "DELETE",
             "header": [],
             "url": "{{baseUrl}}/api/rides/delete/{{unknownId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "B1",
+      "item": [
+        {
+          "name": "B1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/passengers/by-last-name?lastName=iduhorahafi",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "passengers",
+                "by-last-name"
+              ],
+              "query": [
+                {
+                  "key": "lastName",
+                  "value": "iduhorahafi"
+                }
+              ]
+            },
+            "description": "DERIVED IgnoreCase + OrderBy firstName Asc. Expect Honorine and Patrick Iduhorahafi."
+          }
+        }
+      ]
+    },
+    {
+      "name": "B2",
+      "item": [
+        {
+          "name": "B2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rides/by-status?status=REQUESTED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "by-status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "REQUESTED"
+                }
+              ]
+            },
+            "description": "DERIVED enum + OrderBy rideDate Asc."
+          }
+        }
+      ]
+    },
+    {
+      "name": "B3",
+      "item": [
+        {
+          "name": "B3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rides/between?start=2026-10-01&end=2026-10-31",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "between"
+              ],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2026-10-31"
+                }
+              ]
+            },
+            "description": "DERIVED Between. Controller parses Strings to LocalDate."
+          }
+        }
+      ]
+    },
+    {
+      "name": "C1",
+      "item": [
+        {
+          "name": "C1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/riders/by-zone?name=remera",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "riders",
+                "by-zone"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "remera"
+                }
+              ]
+            },
+            "description": "JPQL JOIN zones + LOWER. Case-insensitive zone name."
+          }
+        }
+      ]
+    },
+    {
+      "name": "C2",
+      "item": [
+        {
+          "name": "C2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/motorcycles/free",
+            "description": "JPQL NOT EXISTS. Expect motorcycle fleetNumber 4."
+          }
+        }
+      ]
+    },
+    {
+      "name": "C3",
+      "item": [
+        {
+          "name": "C3",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/zones/unused",
+            "description": "JPQL IS EMPTY. Expect Nyamirambo."
+          }
+        }
+      ]
+    },
+    {
+      "name": "C4",
+      "item": [
+        {
+          "name": "C4",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/passengers/of-rider/{{riderJeanId}}",
+            "description": "JPQL DISTINCT path navigation. Passengers of Jean Baptiste Uwimana."
+          }
+        },
+        {
+          "name": "C4 \u2013 404 unknown rider",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('404 rider missing', function () {",
+                  "  pm.response.to.have.status(404);",
+                  "  pm.expect(pm.response.text()).to.eql('The rider with that id does not exist');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/passengers/of-rider/{{unknownId}}"
           }
         }
       ]
