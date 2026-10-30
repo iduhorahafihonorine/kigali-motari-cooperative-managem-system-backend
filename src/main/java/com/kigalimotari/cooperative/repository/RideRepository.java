@@ -2,6 +2,7 @@ package com.kigalimotari.cooperative.repository;
 
 import com.kigalimotari.cooperative.model.Ride;
 import com.kigalimotari.cooperative.model.RideStatus;
+import com.kigalimotari.cooperative.model.Rider;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
@@ -15,4 +16,7 @@ public interface RideRepository extends JpaRepository<Ride, UUID> {
 
     // B3 – DERIVED
     List<Ride> findByRideDateBetweenOrderByRideDateAsc(LocalDate start, LocalDate end);
+
+    // D1 – DERIVED (existsBy, And, Not)
+    boolean existsByRiderAndRideDateAndStatusNot(Rider rider, LocalDate rideDate, RideStatus status);
 }

@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,6 +47,33 @@ public class RiderController {
     @GetMapping("/by-zone")
     public ResponseEntity<List<Rider>> byZone(@RequestParam String name) {
         return new ResponseEntity<>(riderService.findByZoneName(name), HttpStatus.OK);
+    }
+
+    // D3
+    @PutMapping("/{riderId}/zones/{zoneId}")
+    public ResponseEntity<?> addZone(@PathVariable UUID riderId, @PathVariable UUID zoneId) {
+        String message = riderService.addZone(riderId, zoneId);
+        if (message.equals("Zone added to the rider")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if (message.equals("The rider already has that zone")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
+    // D4
+    @PatchMapping("/{riderId}/motorcycle")
+    public ResponseEntity<?> changeMotorcycle(@PathVariable UUID riderId,
+                                              @RequestParam int fleetNumber) {
+        String message = riderService.changeMotorcycle(riderId, fleetNumber);
+        if (message.equals("Motorcycle changed successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if (message.equals("That motorcycle is taken by another rider")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")

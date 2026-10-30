@@ -19,8 +19,18 @@ public class RideService {
         this.rideRepository = rideRepository;
     }
 
+    // D1 – safe saving
     public String saveRide(Ride ride) {
+        if (ride.getRideDate() != null && ride.getRideDate().isBefore(LocalDate.now())) {
+            return "Ride date cannot be in the past";
+        }
+        if (ride.getRider() != null
+                && rideRepository.existsByRiderAndRideDateAndStatusNot(
+                ride.getRider(), ride.getRideDate(), RideStatus.CANCELLED)) {
+            return "Rider already has a ride on that date";
+        }
         ride.setId(null);
+        ride.setStatus(RideStatus.REQUESTED);
         rideRepository.save(ride);
         return "Ride saved successfully";
     }
@@ -33,6 +43,7 @@ public class RideService {
         return rideRepository.findById(id);
     }
 
+    // D2 – PUT must no longer change status
     public String updateRide(UUID id, Ride updated) {
         Optional<Ride> existing = rideRepository.findById(id);
         if (existing.isEmpty()) {
@@ -40,7 +51,6 @@ public class RideService {
         }
         Ride ride = existing.get();
         ride.setRideDate(updated.getRideDate());
-        ride.setStatus(updated.getStatus());
         ride.setPickup(updated.getPickup());
         ride.setDestination(updated.getDestination());
         ride.setPassenger(updated.getPassenger());
@@ -65,5 +75,30 @@ public class RideService {
     // B3
     public List<Ride> findBetween(LocalDate start, LocalDate end) {
         return rideRepository.findByRideDateBetweenOrderByRideDateAsc(start, end);
+    }
+
+    // D2 – status flow
+    public String updateStatus(UUID id, RideStatus newStatus) {
+        Optional<Ride> existing = rideRepository.findById(id);
+        if (existing.isEmpty()) {
+            return "The ride with that id does not exist";
+        }
+        Ride ride = existing.get();
+        RideStatus current = ride.getStatus();
+        boolean allowed = false;
+        if (current == RideStatus.REQUESTED
+                && (newStatus == RideStatus.PICKED_UP || newStatus == RideStatus.CANCELLED)) {
+            allowed = true;
+        }
+        if (current == RideStatus.PICKED_UP
+                && (newStatus == RideStatus.DROPPED_OFF || newStatus == RideStatus.CANCELLED)) {
+            allowed = true;
+        }
+        if (!allowed) {
+            return "Cannot change status from " + current + " to " + newStatus;
+        }
+        ride.setStatus(newStatus);
+        rideRepository.save(ride);
+        return "Ride status updated successfully";
     }
 }

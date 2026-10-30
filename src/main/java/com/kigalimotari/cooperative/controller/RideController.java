@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,11 +31,18 @@ public class RideController {
         this.rideService = rideService;
     }
 
+    // D1 modifies A2 save
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody Ride ride) {
         String message = rideService.saveRide(ride);
         if (message.equals("Ride saved successfully")) {
             return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }
+        if (message.equals("Ride date cannot be in the past")) {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        if (message.equals("Rider already has a ride on that date")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
@@ -56,6 +64,19 @@ public class RideController {
         LocalDate startDate = LocalDate.parse(start);
         LocalDate endDate = LocalDate.parse(end);
         return new ResponseEntity<>(rideService.findBetween(startDate, endDate), HttpStatus.OK);
+    }
+
+    // D2
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable UUID id, @RequestParam RideStatus status) {
+        String message = rideService.updateStatus(id, status);
+        if (message.equals("Ride status updated successfully")) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if (message.equals("The ride with that id does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/{id}")

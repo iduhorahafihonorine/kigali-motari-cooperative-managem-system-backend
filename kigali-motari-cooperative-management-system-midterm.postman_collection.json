@@ -926,6 +926,236 @@
           }
         }
       ]
+    },
+    {
+      "name": "D1",
+      "item": [
+        {
+          "name": "D1 \u2013 save ride success (future date)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-12-01\",\n  \"status\": \"DROPPED_OFF\",\n  \"pickup\": \"Nyabugogo\",\n  \"destination\": \"Remera\",\n  \"passenger\": { \"id\": \"{{passengerHonorineId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save",
+            "description": "Forces status REQUESTED. 201 Ride saved successfully."
+          }
+        },
+        {
+          "name": "D1 \u2013 400 past date",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('400 past date', function () {",
+                  "  pm.response.to.have.status(400);",
+                  "  pm.expect(pm.response.text()).to.eql('Ride date cannot be in the past');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2020-01-01\",\n  \"status\": \"REQUESTED\",\n  \"pickup\": \"Kimironko\",\n  \"destination\": \"Nyamirambo\",\n  \"passenger\": { \"id\": \"{{passengerHonorineId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save"
+          }
+        },
+        {
+          "name": "D1 \u2013 409 rider already has ride",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rideDate\": \"2026-12-01\",\n  \"status\": \"REQUESTED\",\n  \"pickup\": \"Remera\",\n  \"destination\": \"Kimironko\",\n  \"passenger\": { \"id\": \"{{passengerAliceId}}\" },\n  \"rider\": { \"id\": \"{{riderJeanId}}\" }\n}"
+            },
+            "url": "{{baseUrl}}/api/rides/save",
+            "description": "Run after success save on same date for same rider. Expect 409."
+          }
+        }
+      ]
+    },
+    {
+      "name": "D2",
+      "item": [
+        {
+          "name": "D2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rides/{{rideId}}/status?status=PICKED_UP",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "{{rideId}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PICKED_UP"
+                }
+              ]
+            },
+            "description": "200 Ride status updated successfully when REQUESTED \u2192 PICKED_UP."
+          }
+        },
+        {
+          "name": "D2 \u2013 400 invalid transition",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rides/{{rideId}}/status?status=REQUESTED",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "{{rideId}}",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "REQUESTED"
+                }
+              ]
+            },
+            "description": "Expect 400 Cannot change status from X to Y."
+          }
+        },
+        {
+          "name": "D2 \u2013 404 unknown ride",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('404', function () {",
+                  "  pm.response.to.have.status(404);",
+                  "  pm.expect(pm.response.text()).to.eql('The ride with that id does not exist');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/api/rides/{{unknownId}}/status?status=PICKED_UP"
+          }
+        }
+      ]
+    },
+    {
+      "name": "D3",
+      "item": [
+        {
+          "name": "D3",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/riders/{{riderClaudineId}}/zones/{{zoneNyabugogoId}}",
+            "description": "200 Zone added to the rider."
+          }
+        },
+        {
+          "name": "D3 \u2013 409 already has zone",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/riders/{{riderClaudineId}}/zones/{{zoneNyabugogoId}}",
+            "description": "409 The rider already has that zone."
+          }
+        },
+        {
+          "name": "D3 \u2013 404 unknown rider",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": "{{baseUrl}}/api/riders/{{unknownId}}/zones/{{zoneNyabugogoId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "D4",
+      "item": [
+        {
+          "name": "D4",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/riders/{{riderJeanId}}/motorcycle?fleetNumber=4",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "riders",
+                "{{riderJeanId}}",
+                "motorcycle"
+              ],
+              "query": [
+                {
+                  "key": "fleetNumber",
+                  "value": "4"
+                }
+              ]
+            },
+            "description": "Move Jean to free motorcycle 4. 200 Motorcycle changed successfully."
+          }
+        },
+        {
+          "name": "D4 \u2013 409 motorcycle taken",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/api/riders/{{riderEricId}}/motorcycle?fleetNumber=4",
+            "description": "After D4 success, moto 4 is taken. Expect 409."
+          }
+        },
+        {
+          "name": "D4 \u2013 404 unknown fleetNumber",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/api/riders/{{riderJeanId}}/motorcycle?fleetNumber=99"
+          }
+        }
+      ]
     }
   ]
 }
