@@ -36,7 +36,7 @@ createdb kigali_motari_db
 4. Update credentials in `src/main/resources/application.properties` if needed:
 
 ```properties
-spring.datasource.url=
+spring.datasource.url=jdbc:postgresql://localhost:5432/kigali_motari_db
 spring.datasource.username=postgres
 spring.datasource.password=YOUR_PASSWORD
 ```

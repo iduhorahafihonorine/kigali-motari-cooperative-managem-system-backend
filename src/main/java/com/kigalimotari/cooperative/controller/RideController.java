@@ -66,6 +66,20 @@ public class RideController {
         return new ResponseEntity<>(rideService.findBetween(startDate, endDate), HttpStatus.OK);
     }
 
+    // F1
+    @GetMapping("/stats/by-status")
+    public ResponseEntity<List<Object[]>> statsByStatus() {
+        return new ResponseEntity<>(rideService.ridesPerStatus(), HttpStatus.OK);
+    }
+
+    // F2
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelDay(@RequestParam UUID riderId, @RequestParam String date) {
+        LocalDate rideDate = LocalDate.parse(date);
+        String message = rideService.cancelDay(riderId, rideDate);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
     // D2
     @PatchMapping("/{id}/status")
     public ResponseEntity<?> updateStatus(@PathVariable UUID id, @RequestParam RideStatus status) {
@@ -102,6 +116,9 @@ public class RideController {
         String message = rideService.deleteRide(id);
         if (message.equals("Ride deleted successfully")) {
             return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+        if (message.equals("That ride has fare receipts, delete them first")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }

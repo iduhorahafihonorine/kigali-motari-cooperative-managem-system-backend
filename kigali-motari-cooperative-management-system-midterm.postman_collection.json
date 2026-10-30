@@ -81,6 +81,10 @@
     {
       "key": "unknownId",
       "value": "00000000-0000-0000-0000-000000000099"
+    },
+    {
+      "key": "fareReceiptId",
+      "value": ""
     }
   ],
   "item": [
@@ -1153,6 +1157,173 @@
             "method": "PATCH",
             "header": [],
             "url": "{{baseUrl}}/api/riders/{{riderJeanId}}/motorcycle?fleetNumber=99"
+          }
+        }
+      ]
+    },
+    {
+      "name": "E1",
+      "item": [
+        {
+          "name": "E1",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentMethod\": \"Mobile Money\",\n  \"remarks\": \"Paid on arrival\",\n  \"amountRwf\": 1500\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/fare-receipts/save?rideId={{rideId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "fare-receipts",
+                "save"
+              ],
+              "query": [
+                {
+                  "key": "rideId",
+                  "value": "{{rideId}}"
+                }
+              ]
+            },
+            "description": "Ride must be DROPPED_OFF. 201 Fare receipt saved successfully."
+          }
+        },
+        {
+          "name": "E1 \u2013 404 unknown ride",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentMethod\": \"Cash\",\n  \"remarks\": \"test\",\n  \"amountRwf\": 1000\n}"
+            },
+            "url": "{{baseUrl}}/api/fare-receipts/save?rideId={{unknownId}}"
+          }
+        },
+        {
+          "name": "E1 \u2013 400 not DROPPED_OFF",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentMethod\": \"Cash\",\n  \"remarks\": \"test\",\n  \"amountRwf\": 1000\n}"
+            },
+            "url": "{{baseUrl}}/api/fare-receipts/save?rideId={{rideId}}",
+            "description": "Use a REQUESTED ride id to get 400."
+          }
+        }
+      ]
+    },
+    {
+      "name": "E2",
+      "item": [
+        {
+          "name": "E2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/fare-receipts/passenger/0781234567",
+            "description": "JPQL path d.ride.passenger.phone, newest paidDate first."
+          }
+        }
+      ]
+    },
+    {
+      "name": "E3",
+      "item": [
+        {
+          "name": "E3",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/fare-receipts/delete/{{fareReceiptId}}",
+            "description": "200 Fare receipt deleted successfully."
+          }
+        },
+        {
+          "name": "E3 \u2013 404 unknown receipt",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/fare-receipts/delete/{{unknownId}}"
+          }
+        },
+        {
+          "name": "E3 \u2013 ride delete blocked 409",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/rides/delete/{{rideId}}",
+            "description": "When ride still has receipts: 409 That ride has fare receipts, delete them first."
+          }
+        }
+      ]
+    },
+    {
+      "name": "F1",
+      "item": [
+        {
+          "name": "F1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/rides/stats/by-status",
+            "description": "JPQL GROUP BY COUNT \u2192 List<Object[]>."
+          }
+        }
+      ]
+    },
+    {
+      "name": "F2",
+      "item": [
+        {
+          "name": "F2",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rides/cancel-day?riderId={{riderJeanId}}&date=2026-10-20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "cancel-day"
+              ],
+              "query": [
+                {
+                  "key": "riderId",
+                  "value": "{{riderJeanId}}"
+                },
+                {
+                  "key": "date",
+                  "value": "2026-10-20"
+                }
+              ]
+            },
+            "description": "Bulk UPDATE to CANCELLED except DROPPED_OFF. Returns e.g. '3 rides cancelled'."
           }
         }
       ]

@@ -2,8 +2,10 @@ package com.kigalimotari.cooperative.service;
 
 import com.kigalimotari.cooperative.model.Ride;
 import com.kigalimotari.cooperative.model.RideStatus;
+import com.kigalimotari.cooperative.repository.FareReceiptRepository;
 import com.kigalimotari.cooperative.repository.RideRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,9 +16,11 @@ import java.util.UUID;
 public class RideService {
 
     private final RideRepository rideRepository;
+    private final FareReceiptRepository fareReceiptRepository;
 
-    public RideService(RideRepository rideRepository) {
+    public RideService(RideRepository rideRepository, FareReceiptRepository fareReceiptRepository) {
         this.rideRepository = rideRepository;
+        this.fareReceiptRepository = fareReceiptRepository;
     }
 
     // D1 – safe saving
@@ -59,9 +63,14 @@ public class RideService {
         return "Ride updated successfully";
     }
 
+    // E3 – protect ride delete when fare receipts exist
     public String deleteRide(UUID id) {
-        if (!rideRepository.existsById(id)) {
+        Optional<Ride> existing = rideRepository.findById(id);
+        if (existing.isEmpty()) {
             return "The ride with that id does not exist";
+        }
+        if (fareReceiptRepository.existsByRide(existing.get())) {
+            return "That ride has fare receipts, delete them first";
         }
         rideRepository.deleteById(id);
         return "Ride deleted successfully";
@@ -100,5 +109,17 @@ public class RideService {
         ride.setStatus(newStatus);
         rideRepository.save(ride);
         return "Ride status updated successfully";
+    }
+
+    // F1
+    public List<Object[]> ridesPerStatus() {
+        return rideRepository.countRidesByStatus();
+    }
+
+    // F2
+    @Transactional
+    public String cancelDay(UUID riderId, LocalDate date) {
+        int count = rideRepository.cancelRidesForRiderOnDate(riderId, date);
+        return count + " rides cancelled";
     }
 }
