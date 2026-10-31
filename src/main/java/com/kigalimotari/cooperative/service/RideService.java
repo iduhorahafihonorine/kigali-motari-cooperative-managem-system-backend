@@ -4,6 +4,8 @@ import com.kigalimotari.cooperative.model.Ride;
 import com.kigalimotari.cooperative.model.RideStatus;
 import com.kigalimotari.cooperative.repository.FareReceiptRepository;
 import com.kigalimotari.cooperative.repository.RideRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -121,5 +123,10 @@ public class RideService {
     public String cancelDay(UUID riderId, LocalDate date) {
         int count = rideRepository.cancelRidesForRiderOnDate(riderId, date);
         return count + " rides cancelled";
+    }
+
+    // Bonus – pagination
+    public Page<Ride> findPage(Pageable pageable) {
+        return rideRepository.findAll(pageable);
     }
 }

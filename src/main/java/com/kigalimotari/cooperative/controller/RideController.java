@@ -3,6 +3,10 @@ package com.kigalimotari.cooperative.controller;
 import com.kigalimotari.cooperative.model.Ride;
 import com.kigalimotari.cooperative.model.RideStatus;
 import com.kigalimotari.cooperative.service.RideService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -78,6 +82,21 @@ public class RideController {
         LocalDate rideDate = LocalDate.parse(date);
         String message = rideService.cancelDay(riderId, rideDate);
         return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    // Bonus – page by page; Pageable built in the controller from page, size, sort
+    @GetMapping("/page")
+    public ResponseEntity<Page<Ride>> page(@RequestParam int page,
+                                           @RequestParam int size,
+                                           @RequestParam String sort) {
+        String[] parts = sort.split(",");
+        String property = parts[0];
+        Sort.Direction direction = Sort.Direction.ASC;
+        if (parts.length > 1 && parts[1].equalsIgnoreCase("desc")) {
+            direction = Sort.Direction.DESC;
+        }
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, property));
+        return new ResponseEntity<>(rideService.findPage(pageable), HttpStatus.OK);
     }
 
     // D2

@@ -23,6 +23,11 @@ public interface RideRepository extends JpaRepository<Ride, UUID> {
     // D1 – DERIVED (existsBy, And, Not)
     boolean existsByRiderAndRideDateAndStatusNot(Rider rider, LocalDate rideDate, RideStatus status);
 
+    // Bonus dashboard – DERIVED countBy
+    long countByRideDate(LocalDate rideDate);
+
+    long countByStatus(RideStatus status);
+
     // F1 – JPQL (GROUP BY, COUNT)
     @Query("SELECT e.status, COUNT(e) FROM Ride e GROUP BY e.status")
     List<Object[]> countRidesByStatus();

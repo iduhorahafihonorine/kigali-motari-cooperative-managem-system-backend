@@ -1327,6 +1327,91 @@
           }
         }
       ]
+    },
+    {
+      "name": "Bonus-Dashboard",
+      "item": [
+        {
+          "name": "Bonus dashboard",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('dashboard shape', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  const keys = Object.keys(body);",
+                  "  pm.expect(keys).to.eql(['passengers','riders','freeMotorcycles','ridesToday','requested','fareReceipts']);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/dashboard/summary",
+            "description": "LinkedHashMap summary. Keys in fixed order."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bonus-Page",
+      "item": [
+        {
+          "name": "Bonus rides page",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('page has totals', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  const body = pm.response.json();",
+                  "  pm.expect(body).to.have.property('totalPages');",
+                  "  pm.expect(body).to.have.property('totalElements');",
+                  "  pm.expect(body).to.have.property('content');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rides/page?page=0&size=5&sort=rideDate,desc",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "rides",
+                "page"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sort",
+                  "value": "rideDate,desc"
+                }
+              ]
+            },
+            "description": "Pageable built in controller from page, size, sort."
+          }
+        }
+      ]
     }
   ]
 }
